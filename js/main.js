@@ -23,10 +23,12 @@ function getComputerChoice() {
 // End the function
 }
 
-// Create the function getHumanChoice
+// Create the function "getHumanChoice"
 function getHumanChoice() {
     // Store the user choice in "choice"
     let choice = prompt("Type your choice (rock, paper or scissors):")
+    // Transform "choice" to lower case
+    choice = choice.toLowerCase()
     // If "choice" is not "rock", "paper" or "scissors" then
     if (choice !== "rock" && choice !== "paper" && choice !== "scissors") {
         // Remake the choice and save it in "choice"
@@ -36,4 +38,96 @@ function getHumanChoice() {
     // Return "choice"
     return choice
 // End the function
+}
+
+// Create "humanScore" variable and set it to 0
+let humanScore = 0
+// Create "computerScore" variable and set it to 0
+let computerScore = 0
+// Create the function "playRound", which takes two parameters: "humanChoice", "computerChoice"
+function playRound(humanChoice, computerChoice) {
+    // Create "winner" variable and set it to ""
+    let winner = ""
+    // Create "winnerHuman" variable and set it to "You win! ${humanChoice} beats ${computerChoice}"
+    const winnerHuman = `You win! ${humanChoice} beats ${computerChoice}`
+    // Create "winnerComputer" variable and set it to "You lose! ${computerChoice} beats ${humanChoice}"
+    const winnerComputer = `You lose! ${computerChoice} beats ${humanChoice}`
+    // Create "winnerDraw" variable and set it to "It is a draw!"
+    const winnerDraw = "It is a draw!"
+
+    // If "humanChoice" is "rock" then
+    if (humanChoice === "rock") {
+        // If "computerChoice" is "rock" then
+        if (computerChoice === "rock") {
+            // Set "winner" to "draw"
+            winner = "draw"
+        // If instead "computerChoice" is "paper" then
+        } else if (computerChoice === "paper") {
+            // Set "winner" to "computer"
+            winner = "computer"
+        // If instead "computerChoice" is "scissors" then
+        } else if (computerChoice === "scissors") {
+            // Set "winner" to "human"
+            winner = "human"
+        // End else if
+        }
+    // If instead "humanChoice" is "paper" then
+    } else if (humanChoice === "paper") {
+        // If "computerChoice" is "rock" then
+        if (computerChoice === "rock") {
+            // Set "winner" to "human"
+            winner = "human"
+        // If instead "computerChoice" is "paper" then
+        } else if (computerChoice === "paper") {
+            // Set "winner" to "draw"
+            winner = "draw"
+        // If instead "computerChoice" is "scissors" then
+        } else if (computerChoice === "scissors") {
+            // Set "winner" to "computer"
+            winner = "computer"
+        // End else if
+        }
+    // If instead "humanChoice" is "scissors" then
+    } else if (humanChoice === "scissors") {
+        // If "computerChoice" is "rock" then
+        if (computerChoice === "rock") {
+            // Set "winner" to "computer"
+            winner = "computer"
+        // If instead "computerChoice" is "paper" then
+        } else if (computerChoice === "paper") {
+            // Set "winner" to "human"
+            winner = "human"
+        // If instead "computerChoice" is "scissors" then
+        } else if (computerChoice === "scissors") {
+            // Set "winner" to "draw"
+            winner = "draw"
+        // End else if
+        }
+    // End else if
+    }
+
+    // If "winner" is "human" then
+    if (winner === "human") {
+        // Print on the console "winnerHuman"
+        console.log(winnerHuman)
+        // Increase "humanScore" by 2
+        humanScore += 2
+    // If instead "winner" is "computer" then
+    } else if (winner === "computer") {
+        // Print on the console "winnerComputer"
+        console.log(winnerComputer)
+        // Increase "computerScore"
+        computerScore += 2
+    // If instead "winner" is "draw" then
+    } else {
+        // Print on the console "winnerDraw"
+        console.log(winnerDraw)
+        // Increase "humanScore" by 1
+        humanScore ++
+        // Increase "computerScore" by 1
+        computerScore ++
+    // End else
+    }
+
+// End function
 }
