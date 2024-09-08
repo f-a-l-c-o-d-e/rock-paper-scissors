@@ -1,7 +1,6 @@
 let humanScore = 0
 let computerScore = 0
 let currentRound = 0
-let round = 5
 const rock = document.querySelector(".rock")
 const paper = document.querySelector(".paper")
 const scissors = document.querySelector(".scissors")
@@ -39,11 +38,8 @@ function playRound(humanChoice, computerChoice) {
     // Based on "winner", "humanScore" and "computerScore" update "humanScore" and "computerScore"
     function updateScore (winner) {
         if (winner === "Human") {
-            humanScore += 2
-        } else if (winner === "Computer") {
-            computerScore += 2
-        } else {
             humanScore ++
+        } else if (winner === "Computer") {
             computerScore ++
         }
     }
@@ -186,30 +182,30 @@ function restartGame() {
 
 rock.addEventListener("click", () => {
     currentRound += 1
-    if (currentRound <= round) {
+    if (humanScore < 5 && computerScore < 5) {
         playRound("rock", getComputerChoice())
     }
-    if (currentRound === round) {
+    if (humanScore === 5 || computerScore === 5) {
         getWinnerAndShowWinner(humanScore, computerScore)
         restartGame()
     }
 })
 paper.addEventListener("click", () => {
     currentRound += 1
-    if (currentRound <= round) {
+    if (humanScore < 5 && computerScore < 5) {
         playRound("paper", getComputerChoice())
     }
-    if (currentRound === round) {
+    if (humanScore === 5 || computerScore === 5) {
         getWinnerAndShowWinner(humanScore, computerScore)
         restartGame()
     }
 })
 scissors.addEventListener("click", () => {
     currentRound += 1
-    if (currentRound <= round) {
+    if (humanScore < 5 && computerScore < 5) {
         playRound("scissors", getComputerChoice())
     }
-    if (currentRound === round) {
+    if (humanScore === 5 || computerScore === 5) {
         getWinnerAndShowWinner(humanScore, computerScore)
         restartGame()
     }
