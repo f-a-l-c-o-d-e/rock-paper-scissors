@@ -41,7 +41,7 @@ function getHumanChoice() {
 }
 
 // Create the function "playGame"
-function playGame() {
+function playGame(numberOfRound) {
     // Create "humanScore" variable and set it to 0
     let humanScore = 0
     // Create "computerScore" variable and set it to 0
@@ -93,6 +93,7 @@ function playGame() {
             }
         }
 
+        // Call "updateScore()" and "showWinner()" since they are called together a lot
         function updateScoreAndShowWinner (winner) {
             updateScore(winner)
             showWinner(winner)
@@ -100,22 +101,45 @@ function playGame() {
 
         updateScoreAndShowWinner(winner)
     }
-    playRound(getHumanChoice(),getComputerChoice())
-    // If "humanScore" is higher than "computerScore" then
-    if (humanScore > computerScore) {
-        // Print on the console "You win! Human ${humanScore} - ${computerScore} Computer"
-        console.log(`You win! Human ${humanScore} - ${computerScore} Computer`)
-    // If instead "humanScore" is equal to "computerScore" then
-    } else if (humanScore === computerScore) {
-        // Print on the console "It is a draw! Human ${humanScore} - ${computerScore} Computer"
-        console.log(`It is a draw! Human ${humanScore} - ${computerScore} Computer`)
-    // If instead "humanScore" is lower than "computerScore" then
-    } else if (humanScore < computerScore) {
-        // Print on the console "You lose! Human ${humanScore} - ${computerScore} Computer"
-        console.log(`You lose! Human ${humanScore} - ${computerScore} Computer`)
-    // End else if
+
+    for (let i = 1; i <= numberOfRound; i++) {
+        playRound(getHumanChoice(),getComputerChoice())
     }
-// End function
+
+    // Based on "humanScore" and "computerScore" return the winner as "human", "computer" or "no one"
+    function getWinner(humanScore, computerScore) {
+        if (humanScore > computerScore) {
+            return "human"    
+        } else if (humanScore < computerScore) {
+            return "computer"
+        } else {
+            return "no one"    
+        }
+    }
+
+    // Based on "winner" show a specific message
+    function showWinner (winner) {
+        const winnerHuman = `You win! Human ${humanScore} - ${computerScore} Computer`
+        const winnerComputer = `You lose! Human ${humanScore} - ${computerScore} Computer`
+        const winnerDraw = `It is a draw! Human ${humanScore} - ${computerScore} Computer`
+
+        if (humanScore > computerScore) {
+            console.log(winnerHuman)
+        } else if (humanScore === computerScore) {
+            console.log(winnerDraw)
+        } else if (humanScore < computerScore) {
+            console.log(winnerComputer)
+        }
+    }
+
+    // Call "getWinner()" and "showWinner()" since they are called together a lot
+    function getWinnerAndShowWinner(humanScore, computerScore) {
+        let winner = getWinner(humanScore, computerScore)
+        showWinner(winner)
+    }
+
+    getWinnerAndShowWinner(humanScore, computerScore)
 }
 
-playGame()
+
+playGame(1)
