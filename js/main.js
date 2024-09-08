@@ -11,17 +11,8 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    let choice = prompt("Type your choice (rock, paper or scissors):")
-    choice = choice.toLowerCase()
-    if (choice !== "rock" && choice !== "paper" && choice !== "scissors") {
-        choice = getHumanChoice()
-    }
-    return choice
-}
-
 // Based on "numberOfRound" initialize the game
-function playGame(numberOfRound) {
+function playGame(numberOfRound, humanChoice) {
     let humanScore = 0
     let computerScore = 0
     function playRound(humanChoice, computerChoice) {
@@ -78,7 +69,7 @@ function playGame(numberOfRound) {
 
     // Make the number of rounds equal to "numberOfRound"
     for (let i = 1; i <= numberOfRound; i++) {
-        playRound(getHumanChoice(),getComputerChoice())
+        playRound(humanChoice,getComputerChoice())
     }
 
     // Based on "humanScore" and "computerScore" return the winner as "human", "computer" or "no one"
@@ -117,4 +108,17 @@ function playGame(numberOfRound) {
 }
 
 
-playGame(1)
+
+const rock = document.querySelector(".rock")
+const paper = document.querySelector(".paper")
+const scissors = document.querySelector(".scissors")
+
+rock.addEventListener("click", () => {
+    playGame(1, "rock")
+})
+paper.addEventListener("click", () => {
+    playGame(1, "paper")
+})
+scissors.addEventListener("click", () => {
+    playGame(1, "scissors")
+})
