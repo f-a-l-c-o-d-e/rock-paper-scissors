@@ -53,45 +53,66 @@ function playRound(humanChoice, computerChoice) {
         const container = document.querySelector(".results")
 
         if (currentRound === 1) {
+            const containerGame = document.createElement("div")
+            containerGame.classList.add("game")
+            container.appendChild(containerGame)
+
             const titleGame = document.createElement("h2")
             titleGame.textContent = `Game`
             titleGame.classList.add("game-title")
-            container.appendChild(titleGame)
+            containerGame.appendChild(titleGame)
+
+            const scoreGame = document.createElement("h3")
+            scoreGame.textContent = `Score`
+            scoreGame.classList.add("game-scoreTitle")
+            containerGame.appendChild(scoreGame)
+
 
             const totalWin = document.createElement("p")
             totalWin.textContent = `Human ${humanScore} - ${computerScore} Computer`
             totalWin.classList.add("game-score")
-            container.appendChild(totalWin)
+            containerGame.appendChild(totalWin)
         }
 
-        const titleGame = document.querySelector(".game-title")
+        const containerGame = document.querySelector(".game")
 
         const totalWin = document.querySelector(".game-score")
         totalWin.textContent = `Human ${humanScore} - ${computerScore} Computer`
 
+        const containerRound = document.createElement("div")
+        containerRound.classList.add("round")
+        container.insertBefore(containerRound, containerGame)
+
+
         const title = document.createElement("h2")
         title.textContent = `Round ${currentRound}`
-        container.insertBefore(title, titleGame)
+        title.classList.add("round-title")
+        containerRound.appendChild(title)
 
         const weapon = document.createElement("h3")
         weapon.textContent = `Weapon`
-        container.insertBefore(weapon, titleGame)
+        weapon.classList.add("round-weaponTitle")
+        containerRound.appendChild(weapon)
 
         const humanWeapon = document.createElement("p")
         humanWeapon.textContent = `Human: ${humanChoice}`
-        container.insertBefore(humanWeapon, titleGame)
+        humanWeapon.classList.add("round-humanWeapon")
+        containerRound.appendChild(humanWeapon)
 
         const computerWeapon = document.createElement("p")
         computerWeapon.textContent = `Computer: ${computerChoice}`
-        container.insertBefore(computerWeapon, titleGame)
+        computerWeapon.classList.add("round-computerWeapon")
+        containerRound.appendChild(computerWeapon)
 
         const winnerTitle = document.createElement("h3")
         winnerTitle.textContent = `Winner`
-        container.insertBefore(winnerTitle, titleGame)
+        winnerTitle.classList.add("round-winnerTitle")
+        containerRound.appendChild(winnerTitle)
 
         const win = document.createElement("p")
         win.textContent = `${winner}`
-        container.insertBefore(win, titleGame)
+        win.classList.add("round-winner")
+        containerRound.appendChild(win)
     }
 
     // Call "updateScore()" and "showWinner()" since they are called together a lot
@@ -147,15 +168,17 @@ function getWinner(humanScore, computerScore) {
 // Based on "winner" show a specific message
 function showWinner (winner) {
 
-    const container = document.querySelector(".results")
+    const containerGame = document.querySelector(".game")
         
-    const titleGame = document.createElement("h2")
+    const titleGame = document.createElement("h3")
     titleGame.textContent = `Winner`
-    container.appendChild(titleGame)
+    titleGame.classList.add("game-winnerTitle")
+    containerGame.appendChild(titleGame)
 
     const totalWin = document.createElement("p")
     totalWin.textContent = `${winner}`
-    container.appendChild(totalWin)
+    totalWin.classList.add("game-winner")
+    containerGame.appendChild(totalWin)
 }
 
 // Call "getWinner()" and "showWinner()" since they are called together a lot
