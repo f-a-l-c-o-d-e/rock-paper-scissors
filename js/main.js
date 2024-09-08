@@ -50,12 +50,6 @@ function playGame() {
     function playRound(humanChoice, computerChoice) {
         // Create "winner" variable and set it to ""
         let winner = ""
-        // Create "winnerHuman" variable and set it to "You win! ${humanChoice} beats ${computerChoice}"
-        const winnerHuman = `You win! ${humanChoice} beats ${computerChoice}`
-        // Create "winnerComputer" variable and set it to "You lose! ${computerChoice} beats ${humanChoice}"
-        const winnerComputer = `You lose! ${computerChoice} beats ${humanChoice}`
-        // Create "winnerDraw" variable and set it to "It is a draw!"
-        const winnerDraw = "It is a draw!"
 
         // Based on "humanChoice" and "computerChoice" return the winner as "human", "computer" or "no one"
         function getWinner (humanChoice, computerChoice) {
@@ -72,31 +66,40 @@ function playGame() {
 
         winner = getWinner(humanChoice,computerChoice)
 
-        // If "winner" is "human" then
-        if (winner === "human") {
-            // Print on the console "winnerHuman"
-            console.log(winnerHuman)
-            // Increase "humanScore" by 2
-            humanScore += 2
-        // If instead "winner" is "computer" then
-        } else if (winner === "computer") {
-            // Print on the console "winnerComputer"
-            console.log(winnerComputer)
-            // Increase "computerScore"
-            computerScore += 2
-        // If instead "winner" is "draw" then
-        } else {
-            // Print on the console "winnerDraw"
-            console.log(winnerDraw)
-            // Increase "humanScore" by 1
-            humanScore ++
-            // Increase "computerScore" by 1
-            computerScore ++
-        // End else
+        // Based on "winner", "humanScore" and "computerScore" update "humanScore" and "computerScore"
+        function updateScore (winner) {
+            if (winner === "human") {
+                humanScore += 2
+            } else if (winner === "computer") {
+                computerScore += 2
+            } else {
+                humanScore ++
+                computerScore ++
+            }
         }
-    // End function
+
+        // Based on "winner" show a specific message
+        function showWinner (winner) {
+            const winnerHuman = `You win! ${humanChoice} beats ${computerChoice}`
+            const winnerComputer = `You lose! ${humanChoice} is beaten by ${computerChoice}`
+            const winnerDraw = "It is a draw!"
+
+            if (winner === "human") {
+                console.log(winnerHuman)
+            } else if (winner === "computer") {
+                console.log(winnerComputer)
+            } else {
+                console.log(winnerDraw)
+            }
+        }
+
+        function updateScoreAndShowWinner (winner) {
+            updateScore(winner)
+            showWinner(winner)
+        }
+
+        updateScoreAndShowWinner(winner)
     }
-    // Make the game last 5 rounds
     playRound(getHumanChoice(),getComputerChoice())
     // If "humanScore" is higher than "computerScore" then
     if (humanScore > computerScore) {
