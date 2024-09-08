@@ -57,56 +57,20 @@ function playGame() {
         // Create "winnerDraw" variable and set it to "It is a draw!"
         const winnerDraw = "It is a draw!"
 
-        // If "humanChoice" is "rock" then
-        if (humanChoice === "rock") {
-            // If "computerChoice" is "rock" then
-            if (computerChoice === "rock") {
-                // Set "winner" to "draw"
-                winner = "draw"
-            // If instead "computerChoice" is "paper" then
-            } else if (computerChoice === "paper") {
-                // Set "winner" to "computer"
-                winner = "computer"
-            // If instead "computerChoice" is "scissors" then
-            } else if (computerChoice === "scissors") {
-                // Set "winner" to "human"
-                winner = "human"
-            // End else if
+        // Based on "humanChoice" and "computerChoice" return the winner as "human", "computer" or "no one"
+        function getWinner (humanChoice, computerChoice) {
+            if (humanChoice === computerChoice) {
+                return "no one"
+            } else if ((humanChoice === "rock" && computerChoice === "paper") ||
+                       (humanChoice === "paper" && computerChoice === "scissors") ||
+                       (humanChoice === "scissors" && computerChoice === "rock")) {
+                return "computer"
+            } else {
+                return "human"
             }
-        // If instead "humanChoice" is "paper" then
-        } else if (humanChoice === "paper") {
-            // If "computerChoice" is "rock" then
-            if (computerChoice === "rock") {
-                // Set "winner" to "human"
-                winner = "human"
-            // If instead "computerChoice" is "paper" then
-            } else if (computerChoice === "paper") {
-                // Set "winner" to "draw"
-                winner = "draw"
-            // If instead "computerChoice" is "scissors" then
-            } else if (computerChoice === "scissors") {
-                // Set "winner" to "computer"
-                winner = "computer"
-            // End else if
-            }
-        // If instead "humanChoice" is "scissors" then
-        } else if (humanChoice === "scissors") {
-            // If "computerChoice" is "rock" then
-            if (computerChoice === "rock") {
-                // Set "winner" to "computer"
-                winner = "computer"
-            // If instead "computerChoice" is "paper" then
-            } else if (computerChoice === "paper") {
-                // Set "winner" to "human"
-                winner = "human"
-            // If instead "computerChoice" is "scissors" then
-            } else if (computerChoice === "scissors") {
-                // Set "winner" to "draw"
-                winner = "draw"
-            // End else if
-            }
-        // End else if
         }
+
+        winner = getWinner(humanChoice,computerChoice)
 
         // If "winner" is "human" then
         if (winner === "human") {
@@ -133,10 +97,6 @@ function playGame() {
     // End function
     }
     // Make the game last 5 rounds
-    playRound(getHumanChoice(),getComputerChoice())
-    playRound(getHumanChoice(),getComputerChoice())
-    playRound(getHumanChoice(),getComputerChoice())
-    playRound(getHumanChoice(),getComputerChoice())
     playRound(getHumanChoice(),getComputerChoice())
     // If "humanScore" is higher than "computerScore" then
     if (humanScore > computerScore) {
