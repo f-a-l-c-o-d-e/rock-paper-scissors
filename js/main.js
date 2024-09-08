@@ -124,36 +124,6 @@ function playRound(humanChoice, computerChoice) {
     updateScoreAndShowWinner(winner)
 }
 
-
-rock.addEventListener("click", () => {
-    currentRound += 1
-    if (currentRound <= round) {
-        playRound("rock", getComputerChoice())
-    }
-    if (currentRound === round) {
-        getWinnerAndShowWinner(humanScore, computerScore)
-    }
-})
-paper.addEventListener("click", () => {
-    currentRound += 1
-    if (currentRound <= round) {
-        playRound("paper", getComputerChoice())
-    }
-    if (currentRound === round) {
-        getWinnerAndShowWinner(humanScore, computerScore)
-    }
-})
-scissors.addEventListener("click", () => {
-    currentRound += 1
-    if (currentRound <= round) {
-        playRound("scissors", getComputerChoice())
-    }
-    if (currentRound === round) {
-        getWinnerAndShowWinner(humanScore, computerScore)
-    }
-})
-
-
 // Based on "humanScore" and "computerScore" return the winner as "Human", "Computer" or "No one"
 function getWinner(humanScore, computerScore) {
     if (humanScore > computerScore) {
@@ -186,3 +156,61 @@ function getWinnerAndShowWinner(humanScore, computerScore) {
     let winner = getWinner(humanScore, computerScore)
     showWinner(winner)
 }
+
+function restartGame() {
+    const body = document.querySelector("body")
+    const restart = document.createElement("button")
+    restart.textContent = "Restart the game"
+    body.appendChild(restart)
+    body.removeChild(rock)
+    body.removeChild(paper)
+    body.removeChild(scissors)
+    restart.addEventListener("click", () => {
+        humanScore = 0
+        computerScore = 0
+        currentRound = 0
+        const results = document.querySelector(".results")
+        const round = document.querySelectorAll(".round")
+        const game = document.querySelector(".game")
+        round.forEach(node => results.removeChild(node))
+        results.removeChild(game)
+        body.appendChild(rock)
+        body.appendChild(paper)
+        body.appendChild(scissors)
+        body.removeChild(restart)
+    })
+}
+
+
+
+
+rock.addEventListener("click", () => {
+    currentRound += 1
+    if (currentRound <= round) {
+        playRound("rock", getComputerChoice())
+    }
+    if (currentRound === round) {
+        getWinnerAndShowWinner(humanScore, computerScore)
+        restartGame()
+    }
+})
+paper.addEventListener("click", () => {
+    currentRound += 1
+    if (currentRound <= round) {
+        playRound("paper", getComputerChoice())
+    }
+    if (currentRound === round) {
+        getWinnerAndShowWinner(humanScore, computerScore)
+        restartGame()
+    }
+})
+scissors.addEventListener("click", () => {
+    currentRound += 1
+    if (currentRound <= round) {
+        playRound("scissors", getComputerChoice())
+    }
+    if (currentRound === round) {
+        getWinnerAndShowWinner(humanScore, computerScore)
+        restartGame()
+    }
+})
