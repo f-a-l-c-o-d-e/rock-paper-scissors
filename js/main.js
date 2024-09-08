@@ -49,6 +49,15 @@ function playRound(humanChoice, computerChoice) {
         const container = document.querySelector(".results")
 
         if (currentRound === 1) {
+            const containerScores = document.createElement("div")
+            containerScores.classList.add("rounds")
+            container.appendChild(containerScores)
+
+            const scoresTitle = document.createElement("h2")
+            scoresTitle.textContent = "Rounds"
+            scoresTitle.classList.add("rounds-title")
+            containerScores.appendChild(scoresTitle)
+
             const containerGame = document.createElement("div")
             containerGame.classList.add("game")
             container.appendChild(containerGame)
@@ -70,22 +79,21 @@ function playRound(humanChoice, computerChoice) {
             containerGame.appendChild(totalWin)
         }
 
-        const containerGame = document.querySelector(".game")
+        const containerScores = document.querySelector(".rounds")
 
         const totalWin = document.querySelector(".game-score")
         totalWin.textContent = `Human ${humanScore} - ${computerScore} Computer`
 
         const containerRound = document.createElement("div")
         containerRound.classList.add("round")
-        container.insertBefore(containerRound, containerGame)
+        containerScores.appendChild(containerRound)
 
-
-        const title = document.createElement("h2")
+        const title = document.createElement("h3")
         title.textContent = `Round ${currentRound}`
         title.classList.add("round-title")
         containerRound.appendChild(title)
 
-        const weapon = document.createElement("h3")
+        const weapon = document.createElement("h4")
         weapon.textContent = `Weapon`
         weapon.classList.add("round-weaponTitle")
         containerRound.appendChild(weapon)
@@ -100,7 +108,7 @@ function playRound(humanChoice, computerChoice) {
         computerWeapon.classList.add("round-computerWeapon")
         containerRound.appendChild(computerWeapon)
 
-        const winnerTitle = document.createElement("h3")
+        const winnerTitle = document.createElement("h4")
         winnerTitle.textContent = `Winner`
         winnerTitle.classList.add("round-winnerTitle")
         containerRound.appendChild(winnerTitle)
@@ -166,9 +174,9 @@ function restartGame() {
         computerScore = 0
         currentRound = 0
         const results = document.querySelector(".results")
-        const round = document.querySelectorAll(".round")
+        const rounds = document.querySelector(".rounds")
         const game = document.querySelector(".game")
-        round.forEach(node => results.removeChild(node))
+        results.removeChild(rounds)
         results.removeChild(game)
         body.appendChild(rock)
         body.appendChild(paper)
